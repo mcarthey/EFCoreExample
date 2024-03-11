@@ -41,4 +41,13 @@ public class MainService
     }
 
     // AddClassroom and ListClassrooms methods go here...
+    private async Task ListClassroomsAsync()
+    {
+        var classrooms = await _repository.GetAllClassroomsAsync();
+
+        foreach (var classroom in classrooms)
+        {
+            Console.WriteLine($"ID: {classroom.ClassroomId}, Name: {classroom.Name}");
+        }
+    }
 }

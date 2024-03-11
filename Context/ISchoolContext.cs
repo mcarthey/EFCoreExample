@@ -7,7 +7,6 @@ public interface ISchoolContext
 {
     DbSet<Classroom> Classrooms { get; set; }
     DbSet<Student> Students { get; set; }
-    DbSet<StudentClassroom> StudentClassrooms { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
