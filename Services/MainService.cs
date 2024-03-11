@@ -30,6 +30,7 @@ public class MainService
                     break;
                 case "2":
                     Console.WriteLine("List Classrooms");
+                    await ListClassroomsAsync();
                     break;
                 case "3":
                     return;

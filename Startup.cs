@@ -1,5 +1,6 @@
 using EFCoreExample.Context;
 using EFCoreExample.Services;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +23,11 @@ public class Startup
 
         if (env.IsEnvironment("Testing"))
         {
+            var connection = new SqliteConnection(_configuration.GetConnectionString("DefaultConnection"));
+            connection.Open();
+
             services.AddDbContext<SchoolContextSqlite>(options =>
-                options.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(connection));
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContextSqlite>());
         }
         else
