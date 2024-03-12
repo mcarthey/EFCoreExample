@@ -2,7 +2,7 @@ using EFCoreExample.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace EFCoreExample.Context
+namespace EFCoreExample.Contexts.Repositories
 {
     public class SchoolRepository : ISchoolRepository
     {

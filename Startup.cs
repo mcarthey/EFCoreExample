@@ -1,4 +1,5 @@
-using EFCoreExample.Context;
+using EFCoreExample.Contexts;
+using EFCoreExample.Contexts.Repositories;
 using EFCoreExample.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;

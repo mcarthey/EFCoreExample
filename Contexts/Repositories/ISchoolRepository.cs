@@ -1,6 +1,6 @@
 using EFCoreExample.Models;
 
-namespace EFCoreExample.Context;
+namespace EFCoreExample.Contexts.Repositories;
 
 public interface ISchoolRepository
 {

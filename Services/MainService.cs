@@ -1,6 +1,6 @@
 // MainService.cs
 
-using EFCoreExample.Context;
+using EFCoreExample.Contexts.Repositories;
 
 namespace EFCoreExample.Services;
 

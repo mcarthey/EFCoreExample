@@ -1,7 +1,7 @@
 using EFCoreExample.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCoreExample.Context;
+namespace EFCoreExample.Contexts;
 
 public interface ISchoolContext
 {

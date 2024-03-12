@@ -1,4 +1,5 @@
-﻿using EFCoreExample.Context;
+﻿using EFCoreExample.Contexts;
+using EFCoreExample.Helpers;
 using EFCoreExample.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +26,8 @@ namespace EFCoreExample
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                    var configuration = ConfigurationHelper.GetConfiguration(hostingContext.HostingEnvironment.EnvironmentName);
+                    config.AddConfiguration(configuration);
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
