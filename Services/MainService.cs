@@ -54,20 +54,10 @@ public class MainService
         Console.Write("Enter the name of the new classroom: ");
         var name = Console.ReadLine();
 
-        var newClassroom = new Classroom { Name = name };
+        var newClassroom = new Classroom {Name = name};
         var addedClassroom = await _repository.AddClassroomAsync(newClassroom);
 
         Console.WriteLine($"Added new classroom with ID: {addedClassroom.ClassroomId}, Name: {addedClassroom.Name}");
-    }
-
-    private async Task ListClassroomsAsync()
-    {
-        var classrooms = await _repository.GetAllClassroomsAsync();
-
-        foreach (var classroom in classrooms)
-        {
-            Console.WriteLine($"ID: {classroom.ClassroomId}, Name: {classroom.Name}");
-        }
     }
 
     private async Task AddStudentToClassroomAsync()
@@ -78,10 +68,20 @@ public class MainService
         Console.Write("Enter the name of the new student: ");
         var name = Console.ReadLine();
 
-        var newStudent = new Student { Name = name };
+        var newStudent = new Student {Name = name};
         await _repository.AddStudentToClassroomAsync(classroomId, newStudent);
 
         Console.WriteLine($"Added new student with Name: {newStudent.Name} to classroom with ID: {classroomId}");
+    }
+
+    private async Task ListClassroomsAsync()
+    {
+        var classrooms = await _repository.GetAllClassroomsAsync();
+
+        foreach (var classroom in classrooms)
+        {
+            Console.WriteLine($"ID: {classroom.ClassroomId}, Name: {classroom.Name}");
+        }
     }
 
     private async Task ListStudentsInClassroomAsync()

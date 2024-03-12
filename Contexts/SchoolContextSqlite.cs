@@ -5,10 +5,13 @@ namespace EFCoreExample.Contexts;
 
 public class SchoolContextSqlite : SchoolContext
 {
-    public SchoolContextSqlite(DbContextOptions<SchoolContextSqlite> options) : base(options) { }
+    public SchoolContextSqlite(DbContextOptions<SchoolContextSqlite> options) : base(options)
+    {
+    }
 
     public class SchoolContextSqliteFactory : SchoolContextFactory<SchoolContextSqlite>
     {
+        // Method to configure the options builder with the SQLite connection string
         protected override void ConfigureOptionsBuilder(DbContextOptionsBuilder<SchoolContextSqlite> optionsBuilder, string connectionString)
         {
             optionsBuilder.UseSqlite(connectionString);

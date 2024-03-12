@@ -5,7 +5,9 @@ namespace EFCoreExample.Contexts;
 
 public class SchoolContext : DbContext, ISchoolContext
 {
-    public SchoolContext(DbContextOptions options) : base(options) { }
+    public SchoolContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<Student> Students { get; set; }

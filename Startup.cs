@@ -41,6 +41,4 @@ public class Startup
         services.AddScoped<ISchoolRepository, SchoolRepository>();
         services.AddScoped<MainService>();
     }
-
-
 }

@@ -1,49 +1,48 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFCoreExample.Migrations.SqlServer
+namespace EFCoreExample.Migrations.SqlServer;
+
+/// <inheritdoc />
+public partial class AddSeedData : Migration
 {
     /// <inheritdoc />
-    public partial class AddSeedData : Migration
+    protected override void Down(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.InsertData(
-                table: "Classrooms",
-                columns: new[] { "ClassroomId", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Biology 101" },
-                    { 2, "English Literature 202" },
-                    { 3, "Computer Science 303" }
-                });
+        migrationBuilder.DeleteData(
+            "Classrooms",
+            "ClassroomId",
+            new object[] {1, 2, 3});
 
-            migrationBuilder.InsertData(
-                table: "Students",
-                columns: new[] { "StudentId", "Name" },
-                values: new object[,]
-                {
-                    { 1, "John Doe" },
-                    { 2, "Jane Smith" },
-                    { 3, "Robert Johnson" },
-                    { 4, "Emily Davis" }
-                });
-        }
+        migrationBuilder.DeleteData(
+            "Students",
+            "StudentId",
+            new object[] {1, 2, 3, 4});
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DeleteData(
-                table: "Classrooms",
-                keyColumn: "ClassroomId",
-                keyValues: new object[] { 1, 2, 3 });
+    /// <inheritdoc />
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.InsertData(
+            "Classrooms",
+            new[] {"ClassroomId", "Name"},
+            new object[,]
+            {
+                {1, "Biology 101"},
+                {2, "English Literature 202"},
+                {3, "Computer Science 303"}
+            });
 
-            migrationBuilder.DeleteData(
-                table: "Students",
-                keyColumn: "StudentId",
-                keyValues: new object[] { 1, 2, 3, 4 });
-        }
+        migrationBuilder.InsertData(
+            "Students",
+            new[] {"StudentId", "Name"},
+            new object[,]
+            {
+                {1, "John Doe"},
+                {2, "Jane Smith"},
+                {3, "Robert Johnson"},
+                {4, "Emily Davis"}
+            });
     }
 }
