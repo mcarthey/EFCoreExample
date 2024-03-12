@@ -61,6 +61,65 @@ namespace EFCoreExample.Contexts.Repositories
         }
 
         // CRUD operations for Student
-        // Similar to Classroom, implement GetAllStudentsAsync, GetStudentByIdAsync, AddStudentAsync, UpdateStudentAsync, DeleteStudentAsync
+        public async Task<List<Student>> GetAllStudentsAsync()
+        {
+            return await _context.Students.ToListAsync();
+        }
+
+        public async Task<Student> GetStudentByIdAsync(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                throw new Exception($"Student with id {id} not found.");
+            }
+
+            return student;
+        }
+
+        public async Task<Student> AddStudentAsync(Student student)
+        {
+            _context.Students.Add(student);
+            await _context.SaveChangesAsync();
+            return student;
+        }
+
+        public async Task<Student> UpdateStudentAsync(Student student)
+        {
+            if (_context is DbContext dbContext)
+            {
+                dbContext.Entry(student).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
+            return student;
+        }
+
+        public async Task DeleteStudentAsync(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                throw new Exception($"Student with id {id} not found.");
+            }
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+        }
+
+        // Join operations
+        public async Task AddStudentToClassroomAsync(int classroomId, Student student)
+        {
+            var classroom = await _context.Classrooms.Include(c => c.Students).SingleAsync(c => c.ClassroomId == classroomId);
+            classroom.Students.Add(student);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Student>> GetStudentsInClassroomAsync(int classroomId)
+        {
+            var classroom = await _context.Classrooms.Include(c => c.Students).SingleAsync(c => c.ClassroomId == classroomId);
+            return classroom.Students.ToList();
+        }
+
     }
 }
