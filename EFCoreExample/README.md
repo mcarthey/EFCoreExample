@@ -1,6 +1,6 @@
 # EFCoreExample
 
-EFCoreExample is a .NET Core application that demonstrates the use of Entity Framework Core with both SQLite and SQL Server databases.
+EFCoreExample is a .NET Core application that demonstrates the use of Entity Framework Core in a console application. It provides a simple interface for managing classrooms and students.
 
 ## Overview
 
@@ -11,6 +11,8 @@ The `SchoolContext` class is the Entity Framework DbContext for the application.
 The `SchoolRepository` class provides methods for querying and updating the database using the `SchoolContext`.
 
 The `MainService` class is the entry point for the application's functionality. It uses the `SchoolRepository` to interact with the database and `IConsoleService` for console interactions.
+
+The application provides a console interface for adding classrooms, adding students to classrooms, listing all classrooms, and listing all students in a specific classroom.
 
 ## Configuration
 

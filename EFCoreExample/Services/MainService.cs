@@ -25,7 +25,11 @@ public class MainService
             _consoleService.WriteLine("2. Add Student to Classroom");
             _consoleService.WriteLine("3. List Classrooms");
             _consoleService.WriteLine("4. List Students in Classroom");
-            _consoleService.WriteLine("5. Exit");
+            _consoleService.WriteLine("5. Delete Classroom");
+            _consoleService.WriteLine("6. Delete Student");
+            _consoleService.WriteLine("7. Update Classroom");
+            _consoleService.WriteLine("8. Update Student");
+            _consoleService.WriteLine("9. Exit");
             _consoleService.Write("Select an option: ");
             var option = _consoleService.ReadLine();
 
@@ -44,6 +48,18 @@ public class MainService
                     await ListStudentsInClassroomAsync();
                     break;
                 case "5":
+                    await DeleteClassroomAsync();
+                    break;
+                case "6":
+                    await DeleteStudentAsync();
+                    break;
+                case "7":
+                    await UpdateClassroomAsync();
+                    break;
+                case "8":
+                    await UpdateStudentAsync();
+                    break;
+                case "9":
                     return;
                 default:
                     _consoleService.WriteLine("Invalid option. Please try again.");
@@ -51,6 +67,7 @@ public class MainService
             }
         }
     }
+
 
     public async Task AddClassroomAsync()
     {
@@ -98,5 +115,33 @@ public class MainService
         {
             _consoleService.WriteLine($"ID: {student.StudentId}, Name: {student.Name}");
         }
+    }
+
+    public async Task DeleteClassroomAsync()
+    {
+        // TODO: Implement this method to delete a classroom
+        // You will need to ask the user for the ID of the classroom to delete
+        // Then call the DeleteClassroomAsync method on the repository
+    }
+
+    public async Task DeleteStudentAsync()
+    {
+        // TODO: Implement this method to delete a student
+        // You will need to ask the user for the ID of the student to delete
+        // Then call the DeleteStudentAsync method on the repository
+    }
+
+    public async Task UpdateClassroomAsync()
+    {
+        // TODO: Implement this method to update a classroom
+        // You will need to ask the user for the ID of the classroom to update and the new details
+        // Then call the UpdateClassroomAsync method on the repository
+    }
+
+    public async Task UpdateStudentAsync()
+    {
+        // TODO: Implement this method to update a student
+        // You will need to ask the user for the ID of the student to update and the new details
+        // Then call the UpdateStudentAsync method on the repository
     }
 }

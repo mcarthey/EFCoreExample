@@ -1,25 +1,23 @@
-# EFCoreExample
+# EFCoreExample Assignment
 
-EFCoreExample is a .NET Core application that demonstrates the use of Entity Framework Core in a console application. It provides a simple interface for managing classrooms and students.
+In this assignment, you will be implementing the missing functionality in the `MainService` class of the EFCoreExample application.
 
-## Overview
+## Tasks
 
-The application uses Entity Framework Core to interact with the database, and supports both SQLite and SQL Server databases. The database used depends on the environment: SQLite for testing and SQL Server for development and production.
+1. **Delete a Classroom**: Implement the `DeleteClassroomAsync` method in `MainService.cs`. This method should ask the user for the ID of the classroom to delete, then call the `DeleteClassroomAsync` method on the repository.
 
-The application provides a console interface for adding classrooms, adding students to classrooms, listing all classrooms, and listing all students in a specific classroom.
 
-## Configuration
+2. **Delete a Student**: Implement the `DeleteStudentAsync` method in `MainService.cs`. This method should ask the user for the ID of the student to delete, then call the `DeleteStudentAsync` method on the repository.
 
-The application's configuration, including the database connection string, is stored in `appsettings.json` files. There are separate files for each environment.
 
-## Running the Application
+3. **Update a Classroom**: Implement the `UpdateClassroomAsync` method in `MainService.cs`. This method should ask the user for the ID of the classroom to update and the new details, then call the `UpdateClassroomAsync` method on the repository.
 
-To run the application, use the `dotnet run` command in the root directory of the project.
 
-## Migrations
+4. **Update a Student**: Implement the `UpdateStudentAsync` method in `MainService.cs`. This method should ask the user for the ID of the student to update and the new details, then call the `UpdateStudentAsync` method on the repository.
 
-The application uses Entity Framework Core Migrations to manage the database schema.
 
-## Testing
+## Submission
 
-The application includes unit tests, which are located in a separate project. The tests use xUnit and Moq.
+Once you have completed the tasks, commit your changes and push them to your repository. Make sure to test your code thoroughly before submitting.
+
+Good luck!
