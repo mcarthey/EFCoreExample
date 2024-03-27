@@ -10,7 +10,7 @@ The `SchoolContext` class is the Entity Framework DbContext for the application.
 
 The `SchoolRepository` class provides methods for querying and updating the database using the `SchoolContext`.
 
-The `MainService` class is the entry point for the application's functionality. It uses the `SchoolRepository` to interact with the database and writes output to the console.
+The `MainService` class is the entry point for the application's functionality. It uses the `SchoolRepository` to interact with the database and `IConsoleService` for console interactions.
 
 ## Configuration
 
@@ -27,3 +27,7 @@ To run the application in the testing environment, set the `ASPNETCORE_ENVIRONME
 ## Migrations
 
 The application uses Entity Framework Core Migrations to manage the database schema. The `ApplyMigrations` method in the `Program` class applies any pending migrations when the application starts.
+
+## Testing
+
+The application includes unit tests, which are located in the `EFCoreExample.Tests` project. The tests use xUnit and Moq for testing and mocking respectively. To run the tests, use the `dotnet test` command in the root directory of the project.
