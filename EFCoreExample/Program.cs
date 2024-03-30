@@ -6,52 +6,57 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace EFCoreExample;
-
-internal class Program
+namespace EFCoreExample
 {
-    private static void ApplyMigrations(IServiceScope scope)
+    internal class Program
     {
-        var env = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
-
-        if (env.IsEnvironment("Testing"))
+        // This method applies database migrations based on the environment (Testing or not).
+        private static void ApplyMigrations(IServiceScope scope)
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<SchoolContextSqlite>();
-            dbContext.Database.Migrate();
-        }
-        else
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<SchoolContextSqlServer>();
-            dbContext.Database.Migrate();
-        }
-    }
+            var env = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
 
-    private static IHostBuilder CreateHostBuilder(string[] args)
-    {
-        return Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((hostingContext, config) =>
+            if (env.IsEnvironment("Testing"))
             {
-                var configuration = ConfigurationHelper.GetConfiguration(hostingContext.HostingEnvironment.EnvironmentName);
-                config.AddConfiguration(configuration);
-            })
-            .ConfigureServices((hostContext, services) => { new Startup(hostContext.Configuration).ConfigureServices(services); });
-    }
+                var dbContext = scope.ServiceProvider.GetRequiredService<SchoolContextSqlite>();
+                dbContext.Database.Migrate();
+            }
+            else
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<SchoolContextSqlServer>();
+                dbContext.Database.Migrate();
+            }
+        }
 
-    private static void LogEnvironment(IServiceScope scope)
-    {
-        var env = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
-        Console.WriteLine($"Current environment: {env.EnvironmentName}");
-    }
+        // This method creates a host builder with specific configurations.
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var configuration = ConfigurationHelper.GetConfiguration(hostingContext.HostingEnvironment.EnvironmentName);
+                    config.AddConfiguration(configuration);
+                })
+                .ConfigureServices((hostContext, services) => { new Startup(hostContext.Configuration).ConfigureServices(services); });
+        }
 
-    private static async Task Main(string[] args)
-    {
-        using var host = CreateHostBuilder(args).Build();
-        using var scope = host.Services.CreateScope();
+        // This method logs the current environment.
+        private static void LogEnvironment(IServiceScope scope)
+        {
+            var env = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
+            Console.WriteLine($"Current environment: {env.EnvironmentName}");
+        }
 
-        ApplyMigrations(scope);
-        LogEnvironment(scope);
+        // The main entry point for the application.
+        private static async Task Main(string[] args)
+        {
+            using var host = CreateHostBuilder(args).Build();
+            using var scope = host.Services.CreateScope();
 
-        var mainService = scope.ServiceProvider.GetRequiredService<MainService>();
-        await mainService.RunAsync();
+            ApplyMigrations(scope);
+            LogEnvironment(scope);
+
+            var mainService = scope.ServiceProvider.GetRequiredService<MainService>();
+            await mainService.RunAsync();
+        }
     }
 }
